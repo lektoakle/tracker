@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.contrib.auth import get_user_model
 
 def get_sentinel_user():
@@ -24,20 +25,22 @@ class Ticket(models.Model):
         related_name='ticket_created_by',
         )
     assigned_to = models.ManyToManyField(
-        get_user_model(), 
-        # default = created_by TODO
+        get_user_model(),
         blank=True,
         related_name='ticket_assigned_to',
         )
     date_open = models.DateTimeField(auto_now_add=True)
-    date_due = models.DateTimeField()
+    date_due = models.DateTimeField(null=True, blank=True)
     content = models.TextField(null=True, blank=True)
     status = models.ForeignKey(
         Status, 
         on_delete=models.SET_NULL,
         null=True,
-        blank=True
+        blank=True, 
         )
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('ticket-detail',kwargs={'pk': self.pk})

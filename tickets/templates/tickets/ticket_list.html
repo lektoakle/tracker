@@ -1,0 +1,34 @@
+{% extends 'tickets/base.html' %}
+{% block title %}
+Ticket - Home
+{% endblock title %}
+{% block content %}
+
+    <table class="table-bordered m-3">
+        <tr>
+            <th>Task</th>
+            <th>Status</th>
+            <th>Created by</th>
+            <th>Assigned to</th>
+            <th>Due</th>
+        </tr>
+        {% for object in object_list %}
+            <tr>
+                <td><a href={% url 'ticket-detail' object.id %}>{{ object.title }}</a></td>
+                <td>
+                    {{ object.status }}
+                </td>
+                <td>
+                    {{ object.created_by }}
+                </td>
+                <td>
+                    {% if object.assigned_to is not None %}
+                    {{ object.assigned_to }}
+                    {% endif %}
+                </td>
+                <td> {{ object.date_due }} </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock content %}

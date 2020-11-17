@@ -1,0 +1,14 @@
+{% extends 'tickets/base.html' %}
+
+{% block title%}
+Task: {{ object.title }}
+{% endblock title %}
+
+{% block content %}
+<a href="{% url 'ticket-update' object.id %}"><button class="btn btn-info">Update</button></a>
+<a href="{% url 'ticket-delete' object.id %}" ><button class="btn btn-danger">Delete</button></a>
+<p>{{ object.title }}</p>
+<p>{{ object.assigned_to }}</p>
+<p>{{ object.date_due }}</p>
+<p>{{ object.status }}</p>
+{% endblock %}

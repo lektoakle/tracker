@@ -6,7 +6,7 @@ class CustomUser(AbstractUser):
     '''Custom user class with email as a unique identifier instead of username'''
     username = None
     email = models.EmailField('email address', unique=True)
-
+    
     # unique identifier
     USERNAME_FIELD = 'email'
 
@@ -15,4 +15,4 @@ class CustomUser(AbstractUser):
     objects = CustomUserManager()
 
     def __str__(self):
-        return self.email
+        return " ".join((self.first_name, self.last_name))
