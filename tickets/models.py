@@ -1,11 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth import get_user_model
-
-def get_sentinel_user():
-    """Get or create a user to replace deleted users as foreign key"""
-    return get_user_model().objects.get_or_create(email='deleted@user.com')[0]
-
+from users.models import get_sentinel_user
 
 class Status(models.Model):
     title = models.CharField(max_length=25)

@@ -16,3 +16,7 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return " ".join((self.first_name, self.last_name))
+
+def get_sentinel_user():
+    """Get or create a user to replace deleted users as foreign key"""
+    return CustomUser.objects.get_or_create(email='deleted@user.com')[0]
