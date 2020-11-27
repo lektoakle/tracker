@@ -3,7 +3,7 @@
 Ticket - Home
 {% endblock title %}
 {% block content %}
-
+    <a href="{% url 'ticket-create' %}" class="btn btn-primary">Add</a>
     <table class="table-bordered m-3">
         <tr>
             <th>Task</th>
@@ -22,11 +22,12 @@ Ticket - Home
                     {{ object.created_by }}
                 </td>
                 <td>
-                    {% if object.assigned_to is not None %}
-                    {{ object.assigned_to }}
-                    {% endif %}
+                    {% for person in object.assigned_to.all %}
+                    {{ person }}
+                    {% endfor %}
                 </td>
                 <td> {{ object.date_due }} </td>
+                <td><btn class="btn btn-primary">Done</btn></td>
             </tr>
         {% endfor %}
     </table>
